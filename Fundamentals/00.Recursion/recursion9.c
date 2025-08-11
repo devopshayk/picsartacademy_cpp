@@ -15,5 +15,5 @@
 
 		if (*str >= 'A' && *str <= 'Z') return *str;
     
-    		return firstUppercase(str + 1);
+    	return firstUppercase(str + 1);
 	}
