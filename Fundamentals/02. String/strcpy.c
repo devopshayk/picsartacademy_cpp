@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h> 
+#include <string.h> // For strcspn() function
 
 	char * strCpy(const char * str1, char * str2);
 
