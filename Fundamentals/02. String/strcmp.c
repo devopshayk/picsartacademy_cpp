@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h>
+#include <string.h> // For strcspn() function
 
 	int strCmp(const char* lhs, const char* rhs);
 
@@ -19,7 +19,7 @@
 
 		int result = strCmp(lhs, rhs);
 		
-		puts(""); 
+		puts(""); // For '\n'
 
 		fprintf(stdout, "Result is %d\n", result);
 
@@ -31,7 +31,6 @@
 		
 		while(lhs[i] != '\0' && rhs[i] != '\0') {
 			if(lhs[i] != rhs[i]) return -1;
-
 			i++;
 		}
 
