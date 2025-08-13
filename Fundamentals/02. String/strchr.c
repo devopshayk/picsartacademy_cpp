@@ -30,6 +30,6 @@
         		str++;
     		}
    		
-		 return NULL;
+		 	return NULL;
 	}
 
