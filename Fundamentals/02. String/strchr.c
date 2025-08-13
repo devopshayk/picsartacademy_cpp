@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h>
+#include <string.h> // For strcspn() function
 
 	char * strChr(char * str, int target);
 
