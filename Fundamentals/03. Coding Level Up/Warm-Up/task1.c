@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #define SIZE 5
 
 	void multiply_elems(int * arr1, int * arr2, int size);
