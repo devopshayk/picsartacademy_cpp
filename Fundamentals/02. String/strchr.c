@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h> // For strcspn() function
 
-	char * strChr(char * str, int target);
+	char * strChr(char * str, int ch);
 
 	int main() {
     		char text[50];
@@ -24,9 +24,9 @@
     		return 0;
 	}
 
-	char * strChr(char * str, int target) {
+	char * strChr(char * str, int ch) {
     		while (*str) {
-        		if (*str == target) return str;
+        		if (*str == ch) return str;
         		str++;
     		}
    		
