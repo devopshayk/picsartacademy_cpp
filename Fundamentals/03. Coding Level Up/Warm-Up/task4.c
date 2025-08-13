@@ -1,18 +1,20 @@
 #include <stdio.h>
+#include <string.h>
 
 #define SIZE 50
 
 	void to_uppercase(char str[]);
 	
 	int main() {
-		char str[SIZE];
+		char arr[SIZE];
 
 		fputs("Write text for converting to uppercase: ", stdout);
-		fgets(str, SIZE, stdin);
+		fgets(arr, SIZE, stdin);
+		arr[strcspn(arr, "\n")] = '\0';
 
 		puts("");
 
-		to_uppercase(str);
+		to_uppercase(arr);
 
 		puts("");
 

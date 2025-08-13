@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <string.h>
+	
 #define SIZE 50
 
 	void print_digits(char arr[], int size);
@@ -9,6 +10,7 @@
 		
 		fputs("Write symbols for filtering digits: ", stdout);
 		fgets(arr, SIZE, stdin);
+		arr[strcspn(arr, "\n")] = '\0';
 
 		puts("");
 
