@@ -9,7 +9,7 @@
 
     		fputs("Write text: ", stdout);
     		
-		fgets(text, 50, stdin);
+			fgets(text, 50, stdin);
     		text[strcspn(text, "\n")] = '\0';
 
     		fputs("Write sym for search: ", stdout);
@@ -17,7 +17,7 @@
 
     		char * result = strChr(text, sym);
 		
-		puts("");
+			puts("");
 
     		fprintf(stdout, "%s\n", result ? result : "Symbol not found");
 
