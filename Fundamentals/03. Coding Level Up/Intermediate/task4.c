@@ -1,6 +1,6 @@
-#include <stdio.h> ///////////////
+#include <stdio.h> 
 
-	void remove_duplicates(int arr[], int size);
+	void remove_duplicates(int arr[], int * size);
 
 	int main() {
 		int size;
@@ -13,23 +13,28 @@
 		printf("Write %d elements for array: ", size);
 		for(int i = 0; i < size; i++) scanf("%d", &arr[i]);
 
-		remove_duplicates(arr, size);
-		
 		puts("");
 		
+		printf("Removed array: ");
+		remove_duplicates(arr, &size);
+		puts("");
+
 		return 0;
 	}
 
-	void remove_duplicates(int arr[], int size) {
-		for(int i = 0; i < size - 1; i++) {
-			for(int j = 0; j < size - i - 1; j++) {
-				if(arr[j] > arr[j + 1]) {
-					int tmp = arr[j];
-					arr[j] = arr[j + 1];
-					arr[j + 1] = tmp;
+	void remove_duplicates(int arr[], int * size) {
+		for(int i = 0; i < *size; i++) {
+			for(int j = i + 1; j < *size; j++) {
+				if(arr[i] == arr[j]) {
+					for(int k = j; k < *size - 1; k++) {
+						arr[k] = arr[k + 1];
+					}
+					
+					j--;
+					(*size)--;
 				}
 			}
 		}
-
-		for(int i = 0; i < size; i++) printf("%d ", arr[i]);
+		
+		for(int i = 0; i < *size; i++) printf("%d", arr[i]);
 	}
