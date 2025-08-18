@@ -2,7 +2,6 @@
 
 	typedef enum { WINTER, SPRING, SUMMER, FALL } seasons;
 
-
 	int main() {
 		int month = 0;
 		printf("Write month number(1-12) for detected season: ");

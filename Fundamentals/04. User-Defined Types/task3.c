@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-	typedef enum {SMALL, MEDIUM, LARGE} Size;
+	typedef enum { SMALL, MEDIUM, LARGE } Size;
 
 	int main() {
     		int prices[] = {500, 800, 1200};

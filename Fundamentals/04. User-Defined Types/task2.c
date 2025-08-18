@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-	typedef enum {RED, YELLOW, GREEN} TL;
-
+	typedef enum { RED, YELLOW, GREEN } TL;
 
 	int main() {
 		int num = 0;

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-	typedef enum {READ = 1, WRITE = 2, EXECUTE = 4} Permisions;
+	typedef enum { READ = 1, WRITE = 2, EXECUTE = 4 } Permisions;
 
 	int main() {
 		int perm = 0;
