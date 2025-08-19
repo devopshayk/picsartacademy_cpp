@@ -32,13 +32,13 @@
 
 		puts("");
 
-                printf("Write length for rectangle: ");
-                scanf("%d", &r.length);
+        printf("Write length for rectangle: ");
+        scanf("%d", &r.length);
 
-                printf("Write width for rectangle: ");
-                scanf("%d", &r.width);
+        printf("Write width for rectangle: ");
+        scanf("%d", &r.width);
 
-                perimeter = 2 * (r.length + r.width);
+        perimeter = 2 * (r.length + r.width);
 
 		puts("");
 
