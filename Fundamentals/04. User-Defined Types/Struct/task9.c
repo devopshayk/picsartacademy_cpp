@@ -13,7 +13,7 @@
     		printf("First value: ");
     		scanf("%d", &p.first);
     
-		printf("Second value: ");
+			printf("Second value: ");
     		scanf("%d", &p.second);
 
     		temp.first = p.first;
