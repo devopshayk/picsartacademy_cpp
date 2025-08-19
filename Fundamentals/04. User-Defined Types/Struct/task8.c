@@ -13,7 +13,7 @@
     		printf("Numerator: ");
     		scanf("%d", &r1.numerator);
     		
-		printf("Denominator: ");
+			printf("Denominator: ");
     		scanf("%d", &r1.denominator);
 
     		printf("\n\tEnter the second rational number\n\n");
@@ -21,7 +21,7 @@
     		printf("Numerator: ");
     		scanf("%d", &r2.numerator);
     
-		printf("Denominator: ");
+			printf("Denominator: ");
     		scanf("%d", &r2.denominator);
 
     		sum.numerator = r1.numerator * r2.denominator + r2.numerator * r1.denominator;
