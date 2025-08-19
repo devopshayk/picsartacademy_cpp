@@ -13,7 +13,7 @@
     		printf("Age: ");
     		scanf("%d", &person1.age);
     
-		printf("Height: ");
+			printf("Height: ");
     		scanf("%f", &person1.height);
 
     		printf("\n\tEnter data for the second person\n\n");
@@ -21,7 +21,7 @@
     		printf("Age: ");
     		scanf("%d", &person2.age);
     
-		printf("Height: ");
+			printf("Height: ");
     		scanf("%f", &person2.height);
 
     		printf("\n");
