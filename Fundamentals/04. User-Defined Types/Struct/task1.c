@@ -27,7 +27,6 @@
 		puts("");
 
 
-
 		printf("\tWrite parameters to calculate the perimeter of a rectangle\n");
 
 		puts("");
