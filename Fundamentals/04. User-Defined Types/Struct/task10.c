@@ -14,7 +14,7 @@
     		printf("Weight: ");
     		scanf("%f", &p.weight);
     
-		printf("Height: ");
+			printf("Height: ");
     		scanf("%f", &p.height);
 
     		bmi = p.weight / (p.height * p.height);
