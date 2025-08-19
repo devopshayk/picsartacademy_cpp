@@ -33,7 +33,6 @@
     		else 
         		printf("Both persons are of the same age.\n");
     		
-
     		return 0;
 	}
 
