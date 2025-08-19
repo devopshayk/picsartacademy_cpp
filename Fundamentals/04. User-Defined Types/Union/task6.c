@@ -6,7 +6,7 @@
         		int minutes;
     		} hms;
     		
-		float totalHours;
+			float totalHours;
 	} Time;
 
 	int main() {
