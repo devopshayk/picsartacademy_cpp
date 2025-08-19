@@ -13,7 +13,7 @@
     		printf("1. Length (int)\n");
     		printf("2. Weight (float)\n");
     
-		printf("Choice: ");
+			printf("Choice: ");
     		scanf("%d", &choice);
 
     		if(choice == 1) {
