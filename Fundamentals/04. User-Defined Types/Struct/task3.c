@@ -14,15 +14,15 @@
     		printf("Owner ID: ");
     		scanf("%d", &acc1.ownerId);
     
-		printf("Balance: ");
-		scanf("%f", &acc1.balance);
+			printf("Balance: ");
+			scanf("%f", &acc1.balance);
 
     		printf("\n\tEnter data for second account\n\n");
 
     		printf("Owner ID: ");
     		scanf("%d", &acc2.ownerId);
     
-		printf("Balance: ");
+			printf("Balance: ");
     		scanf("%f", &acc2.balance);
 
     		printf("\nBalances before transfer:\n");
