@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 	typedef struct {
-    		int age;
+    	int age;
    	 	float height;
-		} Person;
+	} Person;
 
 	int main() {
     		Person person1, person2;
