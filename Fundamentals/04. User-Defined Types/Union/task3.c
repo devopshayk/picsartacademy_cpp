@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 	typedef union {
-   		float floatValue;
+   			float floatValue;
     		int intValue;
 	} Value;
 
