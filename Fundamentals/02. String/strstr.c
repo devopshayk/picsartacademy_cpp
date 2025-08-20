@@ -21,6 +21,5 @@
 	}
 
 	char* strstr( const char* str, const char* substr ) {
-		int count = 0;
-		///
+		
 	}
