@@ -33,14 +33,14 @@ This document provides comprehensive coverage of object files (`.o`) and static 
 ## Table of Contents
 
 1. [Technical Overview](#technical-overview)
-2. [Object Files Architecture](#object-files-architecture)
-3. [Static Libraries Implementation](#static-libraries-implementation)
-4. [Build System Integration](#build-system-integration)
-5. [Development Workflow](#development-workflow)
-6. [Reference Implementation](#reference-implementation)
-7. [Best Practices & Standards](#best-practices--standards)
-8. [Troubleshooting Guide](#troubleshooting-guide)
-9. [Performance Considerations](#performance-considerations)
+2. [ELF Essentials](#elf-essentials)
+3. [Object Files Architecture](#object-files-architecture)
+4. [Static Libraries Implementation](#static-libraries-implementation)
+5. [Build System Integration](#build-system-integration)
+6. [Development Workflow](#development-workflow)
+7. [Reference Implementation](#reference-implementation)
+8. [Best Practices & Standards](#best-practices--standards)
+9. [Troubleshooting Guide](#troubleshooting-guide)
 10. [Appendix](#appendix)
 
 ---
@@ -90,6 +90,93 @@ Static libraries are archives containing multiple object files with an index:
 ```
 
 ---
+
+## ELF Essentials
+
+### High-level Structure
+
+An ELF file is composed of:
+
+- ELF Header: identifies the file as ELF and target architecture (class, endianness, ABI)
+- Program Header Table: segments used by the loader at runtime (only in executables/shared objects)
+- Section Header Table: sections used by the linker and tooling (present in relocatable objects and often in executables)
+
+```
+Executable / Shared Object (typical)
+┌──────────────┐
+│ ELF Header   │
+├──────────────┤
+│ Program Hdrs │ → PT_LOAD, PT_DYNAMIC, PT_INTERP, PT_NOTE, ...
+├──────────────┤
+│   Segments   │ → runtime image
+├──────────────┤
+│ Section Hdrs │ (optional/stripped in release builds)
+└──────────────┘
+
+Relocatable Object (.o)
+┌──────────────┐
+│ ELF Header   │
+├──────────────┤
+│ Sections     │ → .text, .data, .bss, .rodata, .rel/.rela.*, .symtab, .strtab
+├──────────────┤
+│ Section Hdrs │
+└──────────────┘
+```
+
+### Common Sections (link-time focus)
+
+| Section | Purpose |
+|---------|---------|
+| `.text` | Machine code for functions |
+| `.rodata` | Read-only constants (strings, literals) |
+| `.data` | Initialized writable globals |
+| `.bss` | Zero-initialized globals (occupies no file space) |
+| `.symtab` | Linker symbol table (functions, variables) |
+| `.strtab` | Associated strings for symbol and section names |
+| `.rel.*` / `.rela.*` | Relocation entries for fixups |
+| `.debug*` | Optional DWARF debug info (not used by linker) |
+
+### Symbols and Binding
+
+- Binding: `LOCAL` (internal), `GLOBAL` (exported), `WEAK` (fallback if strong not found)
+- Type: `FUNC`, `OBJECT`, `SECTION`, `FILE`, etc.
+- Undefined symbols (section = `UND`) must be resolved during linking from other objects or libraries.
+
+Useful views:
+```bash
+nm object.o           # symbols
+readelf -Ws object.o  # detailed symbols
+```
+
+### Relocations (why they exist)
+
+Object code cannot know final addresses. Relocation entries instruct the linker how to adjust addresses/placeholders when laying out sections:
+
+- `REL` vs `RELA`: REL stores addend in the relocated location, RELA stores addend explicitly
+- Typical x86_64 examples: `R_X86_64_PC32` (PC-relative), `R_X86_64_32/64` (absolute)
+
+Inspect relocations:
+```bash
+readelf -r object.o
+objdump -r object.o
+```
+
+### Program Headers (loader view)
+
+Executables/shared objects include program headers describing segments for the loader:
+
+- `PT_LOAD`: loadable segments (code/data)
+- `PT_DYNAMIC`: dynamic linking info (shared libs)
+- `PT_INTERP`: path to dynamic loader
+- `PT_TLS`: thread-local storage
+
+Program headers are not present in `.o` files because they are not runnable.
+
+### Static Libraries and ELF
+
+- A static library `.a` is an ar-archive of multiple ELF `.o` files plus a symbol index
+- The linker extracts only required members (object files) when resolving references
+- Order matters: place `-l<name>` after objects that reference it
 
 ## Object Files Architecture
 
@@ -601,22 +688,6 @@ int main() {
 | Memory Leaks | Proper resource management |
 | Race Conditions | Thread-safe implementations |
 
-### Performance Optimization
-
-```bash
-# Compiler optimization flags
-CFLAGS += -O2 -march=native -mtune=native
-
-# Link-time optimization
-CFLAGS += -flto
-LDFLAGS += -flto
-
-# Profile-guided optimization
-CFLAGS += -fprofile-generate
-# ... run program ...
-CFLAGS += -fprofile-use
-```
-
 ---
 
 ## Troubleshooting Guide
@@ -665,48 +736,6 @@ gcc -v main.c -L. -lmath -o program 2>&1
 ```
 
 ---
-
-## Performance Considerations
-
-### Memory Usage Analysis
-
-```bash
-# Analyze object file size
-size object_file.o
-
-# Check library size
-ls -lh libmath.a
-
-# Analyze executable size
-size executable
-```
-
-### Build Time Optimization
-
-1. **Parallel Compilation**
-   ```bash
-   make -j$(nproc)
-   ```
-
-2. **Incremental Builds**
-   ```bash
-   # Only rebuild changed files
-   make -j$(nproc) -k
-   ```
-
-3. **Precompiled Headers**
-   ```bash
-   gcc -x c-header header.h -o header.h.gch
-   ```
-
-### Runtime Performance
-
-| Optimization | Impact | Trade-off |
-|--------------|--------|-----------|
-| Function Inlining | High | Increased code size |
-| Loop Unrolling | Medium | Increased code size |
-| Dead Code Elimination | Low | Build time |
-| Link-time Optimization | High | Build time |
 
 ---
 
