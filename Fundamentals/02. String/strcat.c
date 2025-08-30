@@ -1,26 +1,38 @@
-	#ifndef STUDENT_H
-	#define STUDENT_H
+#include <stdio.h>
+#include <stdlib.h>
 
-	#include <stdbool.h>
+	int main() {
+		int size = 0;
 
-	typedef enum { CPP, WEB, AI, DevHack } Languages;
-	typedef enum { COMPUTER_SCIENCE, CORE_LANGUAGE, SPECIALTIES } Phase;
+		printf("Write size for int array: ");
+		scanf("%d", &size);
 
-	typedef struct {
-		char name[50];
-		int id;
-		Languages language;
-		Phase phase;
-		int monthExam[3];
-		float totalScore;
-		bool passed;     
-	} Student;
+		int *arr = (int *)malloc(size * sizeof(int));
 
-	void addStudent(Student* s);
-	void inputMonthlyExam(Student* s);
-	void calculateTotal(Student* s);
-	void checkPassed(Student* s);
-	void printStudentReport(Student* s);
-	int minScoreForThirdMonth(int month1, int month2);
+		printf("Write %d elements for array: ", size);
+		for(int i = 0; i < size; i++) {
+			scanf("%d", &arr[i]);
+		}
 
-	#endif
+		int new_elements = 0;
+		printf("Write number of new elements to add: ");
+		scanf("%d", &new_elements);
+
+		arr = (int *)realloc(arr, (size + new_elements) * sizeof(int));
+
+		printf("Write %d new elements: ", new_elements);
+		for(int i = size; i < size + new_elements; i++) {
+			scanf("%d", &arr[i]);
+		}
+
+		size += new_elements;
+
+		puts("");
+		printf("Array's elements:");
+		for(int i = 0; i < size; i++) printf(" %d", arr[i]);
+
+		puts("");
+		free(arr);
+
+		return 0;
+	}
