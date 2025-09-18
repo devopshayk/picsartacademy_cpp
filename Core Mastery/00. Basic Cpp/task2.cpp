@@ -1,19 +1,18 @@
 #include <iostream>
-using namespace std;
 
     void swap(int& x, int& y);
 
     int main() {
         int a, b;
         
-        cout << "Write two nums for swap: ";
-        cin >> a >> b;
+        std::cout << "Write two nums for swap: ";
+        std::cin >> a >> b;
 
-        cout << "Num 1 = " << a << ", Num 2 = " << b << endl;
+        std::cout << "Num 1 = " << a << ", Num 2 = " << b << std::endl;
 
         swap(a, b);
 
-        cout << "Num 1 = " << a << ", Num 2 = " << b << endl;
+        std::cout << "Num 1 = " << a << ", Num 2 = " << b << std::endl;
 
         return 0;
     }
