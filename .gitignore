@@ -6,6 +6,13 @@
 *.ko
 *.obj
 *.elf
+*.bin
+
+# Игнорируем все временные папки сборки
+/bin/
+/build/
+/Debug/
+/Release/
 
 # Linker output
 *.ilk
@@ -53,3 +60,8 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Игнорируем скрытые временные файлы IDE
+*.log
+*.tmp
+*.vscode/
