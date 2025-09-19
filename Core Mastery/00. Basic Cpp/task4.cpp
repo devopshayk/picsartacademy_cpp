@@ -9,7 +9,7 @@ using namespace std;
 
         cout << "Write size for vector: ";
         cin >> N;
-        
+
         cout << endl;
 
         vector<int> v(N);
@@ -17,7 +17,7 @@ using namespace std;
         cout << "Write " << N << " elements for vector: ";
         for(int i = 0; i < N; i++) cin >> v[i];
 
-        for(int i = 0; i < N; i++) sum += v[i];
+        for(int i : v) sum += i;
         average = sum / N;
 
         cout << endl;
