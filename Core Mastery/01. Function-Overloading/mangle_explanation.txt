@@ -1,0 +1,30 @@
+C++ Name Mangling Explanation
+=============================
+
+1. What is mangling:
+- When we write a function in C++, the compiler transforms its name and parameter types
+  into a unique string (mangled name) for the linker.
+- This allows function overloading, namespaces, and templates to work.
+
+2. Example:
+
+void print(int& x);
+void print(const int& y);
+
+- For the compiler, these functions are different, so they get different mangled names.
+- print(int&)       -> _Z5printRi
+- print(const int&) -> _Z5printRKi
+
+3. Key points:
+- If a function takes a parameter by value: int and const int
+  -> the compiler treats them as the same type, the mangled name is identical,
+     overloading is not possible.
+- If by reference (int& / const int&) -> different types, overloading works.
+- Mangled names encode the function name + parameter types + sometimes namespace/class.
+
+4. How to view mangled names in practice:
+- Compile to object file without linking:
+  g++ -c file.cpp
+- List symbols using nm:
+  nm file.o | c++filt
+- c++filt converts mangled names back to human-readable form.
