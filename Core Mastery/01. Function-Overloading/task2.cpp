@@ -13,6 +13,8 @@
         std::cout << "Int = ";
         std::cin >> x;
 
+        std::cout << std::endl;
+
         std::cout << "Int = "; print(x);
         std::cout << "Const Int = "; print(y);
 
