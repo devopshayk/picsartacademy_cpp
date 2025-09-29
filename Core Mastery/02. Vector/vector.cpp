@@ -56,7 +56,7 @@
     }
 
     void myvector_pop_back(MyVector* v) {
-        if(v->size < 0) {
+        if(v->size > 0) {
             v->data[--v->size] = 0; 
         }
     }
@@ -69,7 +69,7 @@
 
             int* new_data = new int[new_capacity];
             for(size_t i = 0; i < v->size; ++i) new_data[i] = v->data[i];
-
+            
             delete[] v->data;
             v->data = new_data;
             v->capacity = new_capacity;
@@ -90,5 +90,6 @@
     }
 
     void myvector_print(const MyVector* v) {
-        for(size_t i = 0; i < v->size; i++) std::cout << v->data[i] << std::endl;
+        for(size_t i = 0; i < v->size; i++) { std::cout <<  v->data[i] << " " ; }
+        std::cout << std::endl;
     }
