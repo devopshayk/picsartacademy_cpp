@@ -31,9 +31,7 @@ size_t myvector_size(const MyVector* v) {
 }
 
 size_t myvector_capacity(const MyVector* v) {
-    size_t capacity = v->capacity;
-
-    return capacity;
+    return v->capacity;
 }
 
 void myvector_push_back(MyVector* v, int value) {
@@ -55,7 +53,7 @@ void myvector_push_back(MyVector* v, int value) {
 
 void myvector_pop_back(MyVector* v) {
     if(v->size > 0) {
-        v->data[--v->size] = 0; 
+        --v->size; 
     } else {
         std::cout << "Vector is empty" << std::endl;
     }
