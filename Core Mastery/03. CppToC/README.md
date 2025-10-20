@@ -28,4 +28,4 @@ Notes:
 - The C++ default constructor sets `name = "Unknown"`; the C default init sets `name = "Hayk"` as a simple placeholder.
 - In C, strings are fixed-size arrays (`char name[50]`), so init/setters use `strncpy` and manual null-termination.
 
-Итог: этот пример показывает, как идеи C++ переносятся в C: классы → структуры + функции, конструкторы → init-функции, перегрузка → отдельные функции. Дальше можно развивать API, валидацию и разбиение по файлам.
+Summary: this example shows how C++ ideas translate to C: classes → structs + functions, constructors → init functions, overloading → separate functions.
