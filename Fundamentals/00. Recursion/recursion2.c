@@ -1,7 +1,7 @@
 #include <stdio.h>
 	
 	int digits_sum(int num);
-		
+
 	int main() {
 		int n = 0;
 
