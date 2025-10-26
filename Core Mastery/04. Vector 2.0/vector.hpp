@@ -34,5 +34,7 @@ class MyVector {
         void pop_back();
         void insert(size_t index, int val);
         void insert(size_t index);
+        void erase(size_t index);
+        void clear();
         void print_vector() const;
 };
