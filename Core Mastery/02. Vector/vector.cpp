@@ -60,7 +60,7 @@ void myvector_pop_back(MyVector* v) {
 }
 
 void myvector_insert(MyVector* v, size_t index, int value) {
-    if(index > v -> size) return;
+    if(index >= v -> size) return;
     if(index < 0) std::cout << "Enter positive index (0 >= index)" << std::endl;
 
     if(v -> size == v -> capacity) {

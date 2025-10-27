@@ -16,7 +16,7 @@ void person_param_init(Person *, char *, int, double);
 
 // Getters
 const char * getName(Person *);
-int getAge(Person *);
+int getAge(const Person * const p);
 double getHeight(Person *);
 
 // Setters
@@ -46,7 +46,7 @@ void person_param_init(Person * p, char * newName, int newAge, double newHeight)
 
 
 const char * getName(Person * p) { return p->name; }
-int getAge(Person * p) { return p->age; }
+int getAge(const Person * const p) { return p->age; }
 double getHeight(Person * p) { return p->height; }
 
 

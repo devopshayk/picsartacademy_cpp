@@ -30,11 +30,9 @@ class SingleList {
         SingleList& operator=(const SingleList& other);  
         SingleList& operator=(SingleList&& other);
 
-        // Methods
-        void push_front(int);
-        void push_back(int);
-        void pop_front();
-        void pop_back();
-        int size();
-        void clear();
+        // Getters
+        size_t size(int size) const;
+        size_t capacity(int capascity) const;
+
+        
 };
