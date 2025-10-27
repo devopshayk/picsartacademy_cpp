@@ -23,7 +23,8 @@ class MyVector {
         MyVector& operator=(const MyVector& other);
 
         // Move & Assignement
-
+        MyVector(MyVector&& other) noexcept;
+        MyVector& operator=(MyVector&& other) noexcept;
 
         // Getters
         size_t getSize() const;

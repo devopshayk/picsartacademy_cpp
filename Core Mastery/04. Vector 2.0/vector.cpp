@@ -1,6 +1,7 @@
 #include "vector.hpp"
 #include <iostream>
 
+// Constructors
 MyVector::MyVector(size_t initial_capacity) 
     : _size{},
     _capacity(initial_capacity)
@@ -13,9 +14,9 @@ MyVector::MyVector(size_t initial_capacity)
 }
 
 MyVector::MyVector(size_t initial_size, int val) 
-    : _size(initial_size),
-    _capacity(initial_size),
-    _data(nullptr)
+    : _size{initial_size},
+    _capacity{initial_size},
+    _data{nullptr}
 {
     if(_capacity > 0) {
         _data = new int[_capacity];
@@ -28,8 +29,8 @@ MyVector::MyVector(size_t initial_size, int val)
 
 MyVector::MyVector(std::initializer_list<int> init) 
     : _size{},
-    _capacity(init.size()),
-    _data(nullptr)
+    _capacity{init.size()},
+    _data{nullptr}
 {
     if(_capacity > 0) {
         _data = new int[init.size()];
@@ -40,16 +41,23 @@ MyVector::MyVector(std::initializer_list<int> init)
     }
 }
 
+
+// Destructor and Clear Method
 MyVector::~MyVector() {
+    _size = 0;
+    _capacity = 0;
+
     delete[] _data;
 }
 
-// --> Ctors And Dtors <--
+void MyVector::clear() { _size = 0; }
 
+
+// Copy Constructor & Copy Assignement Operator
 MyVector::MyVector(const MyVector& other)
-    : _size(other._size),
-    _capacity(other._capacity),
-    _data(nullptr)
+    : _size{other._size},
+    _capacity{other._capacity},
+    _data{nullptr}
 {
     if(_capacity > 0) {
         _data = new int[_capacity];
@@ -81,15 +89,41 @@ MyVector& MyVector::operator=(const MyVector& other) {
     return *this;
 }
 
-// --> Getters  adn Clear <--
+
+// Move Constructor & Move Assignement Operator
+MyVector::MyVector(MyVector&& other) noexcept
+    :_size{other._size},
+    _capacity{other._capacity},
+    _data{other._data}
+{
+    other._size = 0;
+    other._capacity = 0;
+    other._data = nullptr;
+}
+
+MyVector& MyVector::operator=(MyVector&& other) noexcept {
+    if(this == &other) return *this;
+    
+    delete[] _data;
+
+    _data = other._data;
+    _size = other._size;
+    _capacity = other._capacity;
+
+    other._data = nullptr;
+    other._size = 0;
+    other._capacity = 0;
+
+    return *this;
+}
+
+
+// Getters 
 size_t MyVector::getSize() const { return _size; }
 size_t MyVector::getCapacity() const { return _capacity; }
-void MyVector::clear() { _size = 0; }
 
-// -----Move & Assignement-----
-//
-// ----------------------------
 
+// Methods
 void MyVector::push_back(int element) {
     if(_size == _capacity) {
         size_t new_capacity = _capacity * 2;
@@ -113,8 +147,10 @@ void MyVector::pop_back() {
 }
 
 void MyVector::insert(size_t index, int val) {
-    if(index >= _size) return;
-    if(index < 0) std::cout << "Enter positive index (0 >= index)" << std::endl;
+    if(index >= _size || index < 0) {
+        std::cout << "Not valid index, write " << 0 << " >" << " and " << _size << "< index" << std::endl;
+        return;
+    }
 
     if(_size == _capacity) {
         int new_capacity = _capacity * 2;
@@ -136,8 +172,10 @@ void MyVector::insert(size_t index, int val) {
 }
 
 void MyVector::insert(size_t index) {
-    if(index >= _size) return;
-    if(index < 0) std::cout << "Enter positive index (0 >= index)" << std::endl;
+    if(index >= _size || index < 0) {
+        std::cout << "Not valid index, write " << 0 << " >" << " and " << _size << "< index" << std::endl;
+        return;
+    }
 
     if(_size == _capacity) {
         int new_capacity = _capacity * 2;
@@ -159,27 +197,29 @@ void MyVector::insert(size_t index) {
 }
 
 void MyVector::erase(size_t index) {
-    if(index < _size) {
-        if(_size == _capacity) {
-            int new_capacity = _capacity * 2;
-            int * new_data = new int[new_capacity];
+    if(index >= _size) {
+        std::cout << "Not valid index, write " << 0 << " >" << " and " << _size << "< index" << std::endl;
+        return;
+    }
 
-            for(int i{}; i < _size; ++i) new_data[i] = _data[i];
+    if(_size == _capacity) {
+        int new_capacity = _capacity * 2;
+        int * new_data = new int[new_capacity];
 
-            delete[] _data;
-            _data = new_data;
-            _capacity = new_capacity;
+        for(int i{}; i < _size; ++i) new_data[i] = _data[i];
 
-            new_data = nullptr;
-        }
+        delete[] _data;
+        _data = new_data;
+        _capacity = new_capacity;
 
-        for(int i = index; i < _size; ++i) { 
-            _data[i] = _data[i + 1];
-        }
+        new_data = nullptr;
+    }
 
-        _size--;
+    for(int i = index; i < _size; ++i) { 
+        _data[i] = _data[i + 1];
+    }
 
-    } else std::cout << "Not valid index, write " << _size << " < index" << std::endl;
+    _data[_size--];
 }
 
 void MyVector::print_vector() const {
