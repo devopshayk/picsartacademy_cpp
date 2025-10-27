@@ -142,7 +142,7 @@ void MyVector::push_back(int element) {
 }
 
 void MyVector::pop_back() {
-    if(_size) _data[--_size];
+    if(_size) _size--;
     else std::cout << "Vector is empty" << std::endl;
 }
 
@@ -219,7 +219,7 @@ void MyVector::erase(size_t index) {
         _data[i] = _data[i + 1];
     }
 
-    _data[_size--];
+    _size--;
 }
 
 void MyVector::print_vector() const {
