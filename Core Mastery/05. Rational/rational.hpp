@@ -72,7 +72,7 @@ class Rational {
         friend std::istream& operator>>(std::istream& is, Rational& r);
         friend std::ostream& operator<<(std::ostream& os, const Rational& r);
 
-        //Getter MemFun
+        // Getters
         int numerator() const noexcept { return _num; }
         int denominator() const noexcept { return _denum; }
 
