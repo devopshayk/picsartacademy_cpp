@@ -1,5 +1,5 @@
-#include <iostream>
 #pragma once
+#include <iostream>
 
 class Rational {
     private:
@@ -32,7 +32,7 @@ class Rational {
         Rational (Rational&& oth);
 
         // Assign operator
-        Rational& operator= (Rational&& oth);
+        Rational& operator=(Rational&& oth);
         Rational& operator=(const Rational& oth);
 
         // Destructor
