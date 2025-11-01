@@ -1,5 +1,4 @@
 #include <iostream>
-#include <numeric>
 
 
 class Rational {
