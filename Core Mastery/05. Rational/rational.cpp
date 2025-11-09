@@ -15,7 +15,7 @@ Rational::Rational(int num, int denum) {
 }
 
 Rational& Rational::operator=(const Rational& oth) {
-    if (this!= &oth) {
+    if (this != &oth) {
         _num = oth._num;
         _denum = oth._denum;
     }
