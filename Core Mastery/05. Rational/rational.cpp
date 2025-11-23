@@ -10,6 +10,7 @@ Rational::Rational(int num, int denum) {
         }
         _num = num;
         _denum = denum;
+        
         this->reduce_helper();
     }
 }
