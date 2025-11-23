@@ -104,3 +104,64 @@ std::string Customer::getName() const { return name; }
 double Customer::getBalance() const { return balance; }
 void Customer::setBalance(double newBalance) { balance = newBalance; }
 
+void Customer::placeOrder(Order* order) {
+    currentOrder = order;
+}
+
+void Customer::payOrder() {
+    if (balance < currentOrder->getTotalPrice()) {
+        std::cout << "Your balance is few: " << std::endl;
+        return;
+    }
+
+    balance -= currentOrder->getTotalPrice();
+    
+    currentOrder->markPaid();
+}
+
+void Customer::viewOrder() const {
+    if(!currentOrder) {
+        std::cout << "No active order: " << std::endl;
+        return;
+    }
+
+    std::cout << name << "'s order: ";
+    currentOrder->displayOrder();
+}
+
+void Customer::display() const {
+    std::cout << "Name is: " << name << std::endl;
+    std::cout << "Balance = " << balance << std::endl;
+
+    if(currentOrder) {
+        std::cout << "Current ID: " << currentOrder->getOrderId() << std::endl;
+    }
+    else std::cout << "No current order" << std::endl;
+}
+
+
+
+// ----> Barista <----
+
+Barista::Barista(const std::string& newName) : name(newName) {}
+
+std::string Barista::getName() const { return name; }
+void Barista::setName(const std::string& newName) { name = newName; }
+
+void Barista::prepareOrder(Order * order) {
+    if(!order) {
+        std::cout << "No order to prepare. " << std::endl;
+        return;
+    }
+
+    order->markPrepared();
+    std::cout << "Order #" << order->getOrderId() << "has been prepaired" << std::endl;
+}
+
+void Barista::greetCustomer() const {
+    std::cout << name << "greets the customer and asks what they would like to order." << std::endl;
+}
+
+
+
+// ----> CoffeeShop <----
