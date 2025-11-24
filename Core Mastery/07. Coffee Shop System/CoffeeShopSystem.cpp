@@ -291,13 +291,33 @@ void CoffeeShop::serveNextCustomer() {
 }
 
 void CoffeeShop::showQueue() const {
+    if (queue.empty()) {
+        std::cout << "Queue is empty." << std::endl;
+        return;
+    }
 
+    for (const Customer* customer : queue) {
+        std::cout << customer->getName() << " is in queue." << std::endl;
+    }
 }
 
 void CoffeeShop::constructMenu() {
-
+    addDrink(new Drink("Espresso", Drink::Size::Small, 800));
+    addDrink(new Drink("Americano", Drink::Size::Medium, 1200));
+    addDrink(new Drink("Latte", Drink::Size::Medium, 1500));
+    addDrink(new Drink("Cappuccino", Drink::Size::Medium, 1400));
+    addDrink(new Drink("Mocha", Drink::Size::Big, 1800));
 }
 
 void CoffeeShop::displayShopInfo() const {
-     
+    std::cout << "Coffee Shop: " << shopName << std::endl;
+
+    std::cout << "--- Menu ---" << std::endl;
+    showMenu();
+
+    std::cout << "--- Baristas ---" << std::endl;
+    showBaristas();
+
+    std::cout << "--- Queue ---" << std::endl;
+    showQueue();
 }
