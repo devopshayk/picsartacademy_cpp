@@ -81,7 +81,7 @@ void Order::displayOrder() const {
     std::cout << "Prepared: " << (isPrepared ? "Yes" : "No") << std::endl;
     std::cout << "Paid: " << (isPaid ? "Yes" : "No") << std::endl;
     std::cout << "Drinks: " << std::endl;
-
+////////// . ->
     for(const Drink& d : drinks) {
         std::cout << d.getName() << " (";
 
@@ -124,7 +124,7 @@ void Customer::viewOrder() const {
         std::cout << "No active order: " << std::endl;
         return;
     }
-
+ 
     std::cout << name << "'s order: ";
     currentOrder->displayOrder();
 }
@@ -165,3 +165,56 @@ void Barista::greetCustomer() const {
 
 
 // ----> CoffeeShop <----
+
+
+CoffeeShop::CoffeeShop(const std::string& name) : shopName(name) {}
+
+std::string CoffeeShop::getName() const { return shopName; }
+void CoffeeShop::setName(const std::string& newName) { shopName = newName; }
+
+
+void CoffeeShop::addDrink(Drink* drink) {
+    menu.push_back(drink);
+}
+
+void CoffeeShop::removeDrink(const std::string& drinkName) {
+    for(int i = 0; i < menu.size(); i++) {
+        if(menu[i]->getName() == drinkName) {
+            menu.erase(menu.begin() + i);
+            return;
+        }
+    }
+
+    std::cout << "Drink not found. " << std::endl;
+}
+
+void CoffeeShop::showMenu() const {
+    if(menu.size() == 0) {
+        std::cout << "Menu is empty. " << std::endl;
+        return;
+    }
+    
+    for(Drink * drink : menu) {
+        std::cout << "Drink Name: " << drink->getName() << std::endl;
+        std::cout << "Drink Prince: " << drink->getPrice() << std::endl;
+
+        switch(drink->getVolume()) {
+            case Drink::Size::Small: std::cout << "Small"; break;
+            case Drink::Size::Medium: std::cout << "Medium"; break;
+            case Drink::Size::Big: std::cout << "Big"; break;
+        }
+
+        std::cout << std::endl;
+    }
+}
+
+void CoffeeShop::hireBarista(Barista* barista) {
+    
+}
+void CoffeeShop::fireBarista(Barista* barista) {}
+void CoffeeShop::showBaristas() const {}
+void CoffeeShop::addCustomerToQueue(Customer* customer) {}
+void CoffeeShop::serveNextCustomer() {}
+void CoffeeShop::showQueue() const {}
+void CoffeeShop::constructMenu() {}
+void CoffeeShop::displayShopInfo() const {}
