@@ -102,6 +102,7 @@ Customer::Customer(const std::string& name, double balance) : name(name), balanc
 
 std::string Customer::getName() const { return name; }
 double Customer::getBalance() const { return balance; }
+Order* Customer::getCurrentOrder() const { return currentOrder; }
 void Customer::setBalance(double newBalance) { balance = newBalance; }
 
 void Customer::placeOrder(Order* order) {
@@ -209,12 +210,94 @@ void CoffeeShop::showMenu() const {
 }
 
 void CoffeeShop::hireBarista(Barista* barista) {
-    
+    if(!barista) {
+        std::cout << "Barista not found. " << std::endl;
+        return;
+    }
+
+    baristas.push_back(barista);
+    std::cout << "Barista " << barista->getName() << " added!" << std::endl;
 }
-void CoffeeShop::fireBarista(Barista* barista) {}
-void CoffeeShop::showBaristas() const {}
-void CoffeeShop::addCustomerToQueue(Customer* customer) {}
-void CoffeeShop::serveNextCustomer() {}
-void CoffeeShop::showQueue() const {}
-void CoffeeShop::constructMenu() {}
-void CoffeeShop::displayShopInfo() const {}
+
+void CoffeeShop::fireBarista(Barista* barista) {
+    if(baristas.size() == 0) {
+        std::cout << "No barista hired. " << std::endl;
+        return;
+    }
+
+    for(int i = 0; i < baristas.size(); i++) {
+        if(baristas[i]->getName() == barista->getName()) {
+            baristas.erase(baristas.begin() + i);
+
+            std::cout << "Barista " << barista->getName() << " fired." << std::endl;
+
+            return;
+        }
+    }
+
+    std::cout << "Barista not found." << std::endl;
+}
+
+void CoffeeShop::showBaristas() const {
+    if(baristas.size() == 0) std::cout << "No barista hired. " << std::endl;
+
+    for(const Barista * barista : baristas) {
+        std::cout << "Barista: " << barista->getName() << std::endl;
+    }
+}
+
+void CoffeeShop::addCustomerToQueue(Customer* customer) {
+    if(!customer) {
+        std::cout << "" << std::endl;
+        return;
+    }
+
+    queue.push_back(customer);
+    std::cout << customer->getName() << " is added to queue. " << std::endl;
+}
+
+void CoffeeShop::serveNextCustomer() {
+    if(queue.empty()) {
+        std::cout << "No customers in queue." << std::endl;
+        return;
+    }
+
+    Customer* customer = queue[0];
+    if(!customer) {
+        queue.erase(queue.begin());
+        return;
+    }
+
+    if(baristas.empty()) {
+        std::cout << "No baristas available." << std::endl;
+        return;
+    }
+
+    Order* order = customer->getCurrentOrder();
+    if(!order) {
+        std::cout << customer->getName() << " has no order." << std::endl;
+        queue.erase(queue.begin());
+        return;
+    }
+
+    Barista* barista = baristas[0];
+    barista->prepareOrder(order);
+
+    customer->payOrder();
+
+    queue.erase(queue.begin());
+
+    std::cout << "Customer " << customer->getName() << " has been served." << std::endl;
+}
+
+void CoffeeShop::showQueue() const {
+
+}
+
+void CoffeeShop::constructMenu() {
+
+}
+
+void CoffeeShop::displayShopInfo() const {
+     
+}

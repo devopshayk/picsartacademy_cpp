@@ -48,6 +48,7 @@ class Customer {
 
         std::string getName() const;
         double getBalance() const;
+        Order* getCurrentOrder() const;
         void setBalance(double newBalance);
 
         void placeOrder(Order* order);
