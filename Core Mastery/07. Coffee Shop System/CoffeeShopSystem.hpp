@@ -3,6 +3,11 @@
 #include <vector>
 
 
+class Drink;
+class Barista;
+class Customer;
+class Order;
+
 class CoffeeShop {
     private:
         std::string shopName;

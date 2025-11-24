@@ -156,7 +156,7 @@ void Barista::prepareOrder(Order * order) {
     }
 
     order->markPrepared();
-    std::cout << "Order #" << order->getOrderId() << "has been prepaired" << std::endl;
+    std::cout << "Order # " << order->getOrderId() << "has been prepaired" << std::endl;
 }
 
 void Barista::greetCustomer() const {
@@ -199,6 +199,7 @@ void CoffeeShop::showMenu() const {
         std::cout << "Drink Name: " << drink->getName() << std::endl;
         std::cout << "Drink Prince: " << drink->getPrice() << std::endl;
 
+        std::cout << "Drink Size: ";
         switch(drink->getVolume()) {
             case Drink::Size::Small: std::cout << "Small"; break;
             case Drink::Size::Medium: std::cout << "Medium"; break;
@@ -239,7 +240,10 @@ void CoffeeShop::fireBarista(Barista* barista) {
 }
 
 void CoffeeShop::showBaristas() const {
-    if(baristas.size() == 0) std::cout << "No barista hired. " << std::endl;
+    if(baristas.size() == 0) {
+        std::cout << "No barista hired. " << std::endl;
+        return;
+    }
 
     for(const Barista * barista : baristas) {
         std::cout << "Barista: " << barista->getName() << std::endl;
