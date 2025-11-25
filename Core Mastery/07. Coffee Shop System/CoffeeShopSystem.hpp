@@ -8,6 +8,7 @@ class Barista;
 class Customer;
 class Order;
 
+
 class CoffeeShop {
     private:
         std::string shopName;
@@ -62,6 +63,7 @@ class Customer {
 
         void display() const;
 };
+
 
 
 class Order {

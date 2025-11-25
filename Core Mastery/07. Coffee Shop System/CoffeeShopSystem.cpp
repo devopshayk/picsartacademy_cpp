@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+
 //  ----> Drink <----
 
 Drink::Drink(const std::string& name, Size volume, double price) : name(name), volume(volume), price(price) {}
@@ -30,6 +31,7 @@ void Drink::display() const {
 
     std::cout << "Price: " << getPrice() << std::endl;
 }
+
 
 
 //  ----> Order <----
@@ -81,7 +83,7 @@ void Order::displayOrder() const {
     std::cout << "Prepared: " << (isPrepared ? "Yes" : "No") << std::endl;
     std::cout << "Paid: " << (isPaid ? "Yes" : "No") << std::endl;
     std::cout << "Drinks: " << std::endl;
-////////// . ->
+
     for(const Drink& d : drinks) {
         std::cout << d.getName() << " (";
 
@@ -94,6 +96,7 @@ void Order::displayOrder() const {
         std::cout << ") " << d.getPrice() << "AMD" << std::endl;
     }
 }
+
 
 
 // ----> Customer <----
@@ -166,7 +169,6 @@ void Barista::greetCustomer() const {
 
 
 // ----> CoffeeShop <----
-
 
 CoffeeShop::CoffeeShop(const std::string& name) : shopName(name) {}
 
