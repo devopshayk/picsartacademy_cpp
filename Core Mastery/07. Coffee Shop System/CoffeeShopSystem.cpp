@@ -223,6 +223,11 @@ void CoffeeShop::hireBarista(Barista* barista) {
 }
 
 void CoffeeShop::fireBarista(Barista* barista) {
+    if(!barista) {
+        std::cout << "Invalid barista pointer. " << std::endl;
+        return;
+    }
+
     if(baristas.size() == 0) {
         std::cout << "No barista hired. " << std::endl;
         return;
