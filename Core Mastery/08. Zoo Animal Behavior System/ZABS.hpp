@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 
-// ========= ENUM KIND =========
 
 enum class Kind {
     Animal, Mammal, Bird, Reptile,
@@ -12,7 +11,6 @@ enum class Kind {
     Snake, Crocodile
 };
 
-// ========= INTERFACES =========
 
 struct IFly {
     virtual void Fly() = 0;
@@ -39,7 +37,6 @@ struct IFeedable {
     virtual ~IFeedable() = default;
 };
 
-// ========= BASE CLASS =========
 
 class Animal {
 protected:
@@ -61,7 +58,6 @@ public:
     virtual ~Animal() = 0;   
 };
 
-// ========= INTERMEDIATE CLASSES =========
 
 class Mammal : public Animal {
 protected:
@@ -93,9 +89,7 @@ public:
     virtual ~Reptile() = 0;
 };
 
-// ========= CONCRETE SPECIES =========
 
-// --- Mammals ---
 class Lion : public Mammal, public IWalk, public IVoice, public IFeedable {
     int roarPower;
 public:
@@ -126,7 +120,7 @@ public:
     void Feed() override;
 };
 
-// --- Birds ---
+
 class Eagle : public Bird, public IFly, public IWalk, public IVoice, public IFeedable {
     double visionRange;
 public:
@@ -149,7 +143,7 @@ public:
     void Feed() override;
 };
 
-// --- Reptiles ---
+
 class Snake : public Reptile, public IWalk, public IVoice, public IFeedable {
     bool poisonous;
 public:
