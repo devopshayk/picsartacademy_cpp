@@ -9,7 +9,6 @@ public:
     uniqe_ptr() : ptr(nullptr) {}
     uniqe_ptr(T* p) : ptr(p) {}
 
-     Destructor
     ~uniqe_ptr() { delete ptr; }
 
     uniqe_ptr(const uniqe_ptr&) = delete;

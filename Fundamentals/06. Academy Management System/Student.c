@@ -71,4 +71,3 @@
 		if (minScore < 0) minScore = 0;
 		return minScore;
 	}
-

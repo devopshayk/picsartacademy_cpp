@@ -50,5 +50,8 @@ int main() {
     std::cout << "c count = " << c.use_count() << "\n";
     std::cout << "d count = " << d.use_count() << "\n";
 
+    shared_ptr<Test> dw(nullptr);
+    shared_ptr<Test> dww = dw;
+
     std::cout << "---- END ----\n";
 }

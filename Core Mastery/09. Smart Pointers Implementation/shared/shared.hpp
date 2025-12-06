@@ -32,6 +32,7 @@ class shared_ptr {
             other.count = nullptr;
         }
 
+
         shared_ptr& operator=(const shared_ptr& other) {
             if (this != &other) {
                 release_current();
@@ -77,3 +78,4 @@ class shared_ptr {
             std::swap(count, other.count);
         }
 };
+
