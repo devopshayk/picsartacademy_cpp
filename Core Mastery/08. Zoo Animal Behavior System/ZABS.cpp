@@ -2,7 +2,7 @@
 
 int Animal::_nextId = 1;
 
-Animal::Animal(const std::string& name)
+ Animal::Animal(const std::string& name)
     : name(name), health(100), hunger(0), _kind(Kind::Animal), id(_nextId++) {
     std::cout << "Animal ctor: " << name << std::endl;
 }
