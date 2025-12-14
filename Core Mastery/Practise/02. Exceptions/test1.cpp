@@ -1,11 +1,18 @@
-#include <memory>
-#include <iostream>
+// #include <iostream>
+// #include <memory>
+
+// class unioque {
+//     int a;
+
+//     public:
+//        int geT() const {
+//             return a;
+//        }
+// };
 
 
+// int main() {
+//     std::unique_ptr<unioque> ptr = std::make_unique<unioque>;
 
-int main() {
-
-    
-
-    return 0;
-}
+//     std::cout << ptr->geT()<< std::endl;
+// }
