@@ -122,7 +122,6 @@ class Drink {
 };
 
 
-
 class Barista {
     private:
         std::string name;
