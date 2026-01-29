@@ -23,10 +23,7 @@ void Library::removeShelf(size_t index) {
     }
 }
 
-void Library::addBook(size_t shelfIndex,
-                      int id,
-                      const std::string& title,
-                      const std::string& authorName) {
+void Library::addBook(size_t shelfIndex, int id, const std::string& title, const std::string& authorName) {
     if (shelfIndex >= shelves.size()) {
         return;
     }
