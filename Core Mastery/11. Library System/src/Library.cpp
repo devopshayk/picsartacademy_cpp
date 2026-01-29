@@ -54,9 +54,7 @@ void Library::removeBookByTitle(const std::string& title) {
     }
 }
 
-void Library::transferBook(const std::string& title,
-                           size_t from,
-                           size_t to) {
+void Library::transferBook(const std::string& title, size_t from, size_t to) {
     if (from >= shelves.size() || to >= shelves.size()) {
         return;
     }
@@ -67,9 +65,7 @@ void Library::transferBook(const std::string& title,
     }
 }
 
-void Library::replaceBook(int id,
-                          const std::string& newTitle,
-                          const std::string& newAuthor) {
+void Library::replaceBook(int id, const std::string& newTitle, const std::string& newAuthor) {
     for (size_t i = 0; i < shelves.size(); ++i) {
         std::vector<std::unique_ptr<Book>>& books =
             const_cast<std::vector<std::unique_ptr<Book>>&>(
