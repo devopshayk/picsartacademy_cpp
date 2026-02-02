@@ -17,13 +17,11 @@ int main() {
     repository.addEmployee(dev2);
     repository.addEmployee(sales1);
 
-    // Выводим всех сотрудников
     std::cout << "--- All Employees ---" << std::endl;
     for (const auto& emp : repository.getAll()) {
         emp->display();
     }
 
-    // Выплата зарплаты
     std::cout << "\n--- Payroll ---" << std::endl;
     payroll.processPayroll(repository.getAll());
 

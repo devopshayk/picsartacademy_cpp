@@ -78,4 +78,3 @@ class shared_ptr {
             std::swap(count, other.count);
         }
 };
-
