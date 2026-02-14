@@ -5,6 +5,7 @@
 #include <array>
 #include <set>
 
+
 template<typename T>
 auto sumContainer(const T& container) {
     auto sum{};
