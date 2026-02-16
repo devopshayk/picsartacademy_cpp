@@ -19,7 +19,7 @@ double multiply<double>(double a, double b) {
 }
 
 std::string multiply(std::string str, int count) {
-    std::string newString;
+    std::string newString{};
 
     for(int i{}; i < count; ++i) {
         newString += str;

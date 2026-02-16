@@ -29,6 +29,7 @@ std::unique_ptr<Book> Shelf::releaseBookByTitle(const std::string& title) {
         if (books[i]->getTitle() == title) {
             std::unique_ptr<Book> result = std::move(books[i]);
             books.erase(books.begin() + i);
+
             return result;
         }
     }

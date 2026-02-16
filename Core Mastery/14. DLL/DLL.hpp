@@ -20,3 +20,10 @@ class DLL {
         DLL(T val) : value(val), next(nullptr), prev(nullptr) {};
         DLL(std::initializer_list<T> init);
 };
+
+// template<typename Container, typename Index>
+// auto get(Container& c, Index i) { return c[i]; }
+
+// auto foo() {
+//     return {1, 2};
+// }

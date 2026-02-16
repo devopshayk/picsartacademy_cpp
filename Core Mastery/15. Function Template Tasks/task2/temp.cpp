@@ -8,7 +8,7 @@
 
 template<typename T>
 auto sumContainer(const T& container) {
-    auto sum{};
+    int sum{};
 
     for(const auto& cnt : container) {
         sum += cnt;
