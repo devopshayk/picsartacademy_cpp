@@ -71,8 +71,7 @@ void Library::replaceBook(int id, const std::string& newTitle, const std::string
 
         for (size_t j = 0; j < books.size(); ++j) {
             if (books[j]->getId() == id) {
-                std::shared_ptr<Author> author =
-                    getOrCreateAuthor(newAuthor);
+                std::shared_ptr<Author> author = getOrCreateAuthor(newAuthor);
 
                 books[j].reset(new Book(id, newTitle, author));
                 return;
