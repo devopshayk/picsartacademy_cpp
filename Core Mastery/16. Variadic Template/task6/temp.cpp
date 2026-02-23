@@ -16,7 +16,7 @@ auto minValue2(F first, Arg... args) {
 }
 
 int main() {
-    auto v1 = minValue(5, 6.6, -3, -1, 123); // Version 1
+    auto v1 = minValue(5, 6.6, -3, -1, 123);  // Version 1
     auto v2 = minValue2(5, 6.6, -3, -1, 123); // Version 2
 
     std::cout << "Version 1: " << v1 << std::endl;
