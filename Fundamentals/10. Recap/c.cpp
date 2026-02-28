@@ -1,275 +1,71 @@
-#include <initializer_list>
-#include <stdexcept>
-#include <utility>
+#include <iostream>
 #include <vector>
+using namespace std;
 
-template<typename T>
-class List
+int main()
+
 {
-private:
 
-    struct Node
-    {
-        Node* prev;
-        Node* next;
-        T value;
+    // initialize a vector
 
-        Node(const T& v)
-            : prev(nullptr), next(nullptr), value(v) {}
+    vector<int> v1 = { 10, 20, 30, 40 }; 
 
-        Node(T&& v)
-            : prev(nullptr), next(nullptr), value(std::move(v)) {}
-    };
+    // declare an iterator
 
-    Node* head;
-    Node* tail;
-    size_t sz;
+    vector<int>::iterator itr;
 
-public:
+    // access vector elements without iterator
 
-    List() noexcept
-        : head(nullptr), tail(nullptr), sz(0) {}
+    cout << "Traversing without iterator : ";
 
-    ~List()
-    {
-        clear();
+    for (int j = 0; j < 4; ++j) {
+
+        cout << v1[j] << " ";
+
     }
 
-    List(const List& other)
-        : List()
-    {
-        for (Node* n = other.head; n; n = n->next)
-            push_back(n->value);
+    cout << "\n";
+
+    // access vector elements using an iterator
+
+    cout << "Traversing using iterator ";
+
+    for (itr = v1.begin(); itr != v1.end(); ++itr) {
+
+        cout << *itr << " ";
+
     }
 
-    List(List&& other) noexcept
-        : head(other.head),
-          tail(other.tail),
-          sz(other.sz)
-    {
-        other.head = nullptr;
-        other.tail = nullptr;
-        other.sz = 0;
+    cout << "\n\n";
+
+    // insert an element into the vector
+
+    v1.push_back(50);
+
+    // access vector elements without iterator
+
+    cout << "Traversing without iterator : ";
+
+    for (int j = 0; j < 5; ++j) {
+
+        cout << v1[j] << " ";
+
     }
 
-    List(std::initializer_list<T> init)
-        : List()
-    {
-        for (const auto& v : init)
-            push_back(v);
+    cout << "\n";
+
+    // access vector elements using an iterator
+
+    cout << "Traversing using iterator ";
+
+    for (itr = v1.begin(); itr != v1.end(); ++itr) {
+
+        cout << *itr << " ";
+
     }
 
-    explicit List(const std::vector<T>& vec)
-        : List()
-    {
-        for (const auto& v : vec)
-            push_back(v);
-    }
+    cout << "\n\n";
 
-    List& operator=(List other)
-    {
-        swap(other);
-        return *this;
-    }
+    return 0;
 
-    size_t size() const noexcept
-    {
-        return sz;
-    }
-
-    bool empty() const noexcept
-    {
-        return sz == 0;
-    }
-
-    T& front()
-    {
-        if (!head) throw std::out_of_range("list empty");
-        return head->value;
-    }
-
-    const T& front() const
-    {
-        if (!head) throw std::out_of_range("list empty");
-        return head->value;
-    }
-
-    T& back()
-    {
-        if (!tail) throw std::out_of_range("list empty");
-        return tail->value;
-    }
-
-    const T& back() const
-    {
-        if (!tail) throw std::out_of_range("list empty");
-        return tail->value;
-    }
-
-    void push_back(const T& value)
-    {
-        Node* n = new Node(value);
-
-        if (!tail)
-            head = tail = n;
-        else
-        {
-            tail->next = n;
-            n->prev = tail;
-            tail = n;
-        }
-
-        ++sz;
-    }
-
-    void push_back(T&& value)
-    {
-        Node* n = new Node(std::move(value));
-
-        if (!tail)
-            head = tail = n;
-        else
-        {
-            tail->next = n;
-            n->prev = tail;
-            tail = n;
-        }
-
-        ++sz;
-    }
-
-    void push_front(const T& value)
-    {
-        Node* n = new Node(value);
-
-        if (!head)
-            head = tail = n;
-        else
-        {
-            n->next = head;
-            head->prev = n;
-            head = n;
-        }
-
-        ++sz;
-    }
-
-    void push_front(T&& value)
-    {
-        Node* n = new Node(std::move(value));
-
-        if (!head)
-            head = tail = n;
-        else
-        {
-            n->next = head;
-            head->prev = n;
-            head = n;
-        }
-
-        ++sz;
-    }
-
-    void pop_back()
-    {
-        if (!tail) throw std::out_of_range("list empty");
-
-        Node* old = tail;
-        tail = tail->prev;
-
-        if (tail)
-            tail->next = nullptr;
-        else
-            head = nullptr;
-
-        delete old;
-        --sz;
-    }
-
-    void pop_front()
-    {
-        if (!head) throw std::out_of_range("list empty");
-
-        Node* old = head;
-        head = head->next;
-
-        if (head)
-            head->prev = nullptr;
-        else
-            tail = nullptr;
-
-        delete old;
-        --sz;
-    }
-
-    void insert(size_t pos, const T& value)
-    {
-        if (pos > sz) throw std::out_of_range("bad index");
-
-        if (pos == 0)
-            return push_front(value);
-
-        if (pos == sz)
-            return push_back(value);
-
-        Node* cur = head;
-
-        for (size_t i = 0; i < pos; ++i)
-            cur = cur->next;
-
-        Node* n = new Node(value);
-
-        n->prev = cur->prev;
-        n->next = cur;
-
-        cur->prev->next = n;
-        cur->prev = n;
-
-        ++sz;
-    }
-
-    void erase(size_t pos)
-    {
-        if (pos >= sz) throw std::out_of_range("bad index");
-
-        if (pos == 0)
-            return pop_front();
-
-        if (pos == sz - 1)
-            return pop_back();
-
-        Node* cur = head;
-
-        for (size_t i = 0; i < pos; ++i)
-            cur = cur->next;
-
-        cur->prev->next = cur->next;
-        cur->next->prev = cur->prev;
-
-        delete cur;
-        --sz;
-    }
-
-    void clear() noexcept
-    {
-        Node* cur = head;
-
-        while (cur)
-        {
-            Node* next = cur->next;
-            delete cur;
-            cur = next;
-        }
-
-        head = nullptr;
-        tail = nullptr;
-        sz = 0;
-    }
-
-    void swap(List& other) noexcept
-    {
-        std::swap(head, other.head);
-        std::swap(tail, other.tail);
-        std::swap(sz, other.sz);
-    }
-};
+}

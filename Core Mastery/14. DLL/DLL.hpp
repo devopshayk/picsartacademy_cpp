@@ -52,8 +52,7 @@ class List {
 
         public:
 
-            List()
-            {
+            List() {
                 sentinel = new Node;
 
                 sentinel->next = sentinel;
@@ -62,21 +61,18 @@ class List {
                 sz = 0;
             }
 
-            ~List()
-            {
+            ~List() {
                 clear();
                 delete sentinel;
             }
 
 
-            bool empty() const
-            {
+            bool empty() const {
                 return sz == 0;
             }
 
 
-            size_t size() const
-            {
+            size_t size() const {
                 return sz;
             }
 
@@ -146,12 +142,10 @@ class List {
                 erase(begin());
             }
 
-            void clear()
-            {
+            void clear() {
                 Node* current = sentinel->next;
 
-                while (current != sentinel)
-                {
+                while (current != sentinel) {
                     Node* next = current->next;
                     delete current;
                     current = next;
