@@ -6,7 +6,7 @@ void printAll1(Arg... args) {
     ((std::cout << args << "\n"), ...);
 }
 
-template<typename... Arg>
+template<typename... Arg>   
 void printAll2(Arg... args) {
     (std::cout << ... << (std::string(args) + "\n"));
 }

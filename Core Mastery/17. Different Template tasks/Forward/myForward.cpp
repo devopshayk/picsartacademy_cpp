@@ -18,6 +18,7 @@ void wrapper(T&& arg) {
     detect(my_forward<T>(arg));
 }
 
+
 int main() {
     int a = 42;
     wrapper(a);
