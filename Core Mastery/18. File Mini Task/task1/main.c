@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    FILE* file = fopen("text.txt", "r");
+    FILE * file = fopen("text.txt", "r");
 
     if (file == NULL) {
         printf("File not opened\n");
